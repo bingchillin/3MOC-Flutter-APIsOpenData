@@ -1,4 +1,5 @@
 import 'package:apis_open_data/listing.dart';
+import 'package:apis_open_data/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -47,9 +48,7 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('CityExplore Paris'),
-      ),
+      appBar: const AppBarWidget(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -96,18 +95,7 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       // Barre de navigation ---------------------------------------------------
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Accueil',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite),
-            label: 'Favoris',
-          ),
-        ],
-      ),
+      bottomNavigationBar: const BottomBarWidget(),
     );
   }
 }
