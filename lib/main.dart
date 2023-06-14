@@ -1,3 +1,4 @@
+import 'package:apis_open_data/listing.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -34,6 +35,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Interface',
       theme: darkTheme,
       home: MyHomePage(),
+      initialRoute: '/',
+      routes: {
+        Listing.routeName : (context) => const Listing(),
+      },
     );
   }
 }
