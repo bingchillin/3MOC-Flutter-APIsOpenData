@@ -14,6 +14,67 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
+class TitleWidget extends StatelessWidget {
+  const TitleWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 0.0, left: 16.0, top: 16.0, right: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Bonjour,',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          const SizedBox(height: 15),
+          Text(
+            'Recherchez une sortie, un concert ou un évènement',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SearchBarWidget extends StatelessWidget {
+  const SearchBarWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.all(16),
+      child: TextField(
+        decoration: InputDecoration(
+            hintText: 'Adresse, date...',
+            suffixIcon: Icon(Icons.search)
+        ),
+      ),
+    );
+  }
+}
+
+class ListWidget extends StatelessWidget {
+  const ListWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text('Élément $index'),
+            subtitle: Text('Sous-titre de l\'élément $index'),
+          );
+        },
+      ),
+    );
+  }
+}
+
 
 class BottomBarWidget extends StatelessWidget {
   const BottomBarWidget({super.key});

@@ -23,6 +23,8 @@ class MyApp extends StatelessWidget {
     },
   );
 
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Données pour le thème (dark + couleurs vertes) --------------------------
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Interface',
       theme: darkTheme,
-      home: MyHomePage(),
+      home: const MyHomePage(),
       initialRoute: '/',
       routes: {
         Listing.routeName : (context) => const Listing(),
@@ -45,6 +47,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatelessWidget {
+  const MyHomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,33 +57,9 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Titre + sous-titre ------------------------------------------------
-          Padding(
-            padding: const EdgeInsets.only(bottom: 0.0, left: 16.0, top: 16.0, right: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Bonjour,',
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 15),
-                Text(
-                  'Recherchez une sortie, un concert ou un évènement',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-              ],
-            ),
-          ),
+          const TitleWidget(),
           // Barre de recherche ------------------------------------------------
-          const Padding(
-            padding: EdgeInsets.all(16),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Adresse, date...',
-                suffixIcon: Icon(Icons.search)
-              ),
-            ),
-          ),
+          const SearchBarWidget(),
           // Liste -------------------------------------------------------------
           Expanded(
             child: ListView.builder(
@@ -92,6 +72,7 @@ class MyHomePage extends StatelessWidget {
               },
             ),
           ),
+          //const ListWidget(),
         ],
       ),
       // Barre de navigation ---------------------------------------------------
