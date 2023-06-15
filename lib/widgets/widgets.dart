@@ -20,18 +20,26 @@ class TitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 0.0, left: 16.0, top: 16.0, right: 16.0),
+      padding: const EdgeInsets.only(
+        bottom: 0.0, left: 16.0, top: 16.0, right: 16.0,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             'Bonjour,',
-            style: Theme.of(context).textTheme.titleLarge,
+            style: Theme
+                .of(context)
+                .textTheme
+                .titleLarge,
           ),
           const SizedBox(height: 15),
           Text(
             'Recherchez une sortie, un concert ou un évènement',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: Theme
+                .of(context)
+                .textTheme
+                .titleMedium,
           ),
         ],
       ),
@@ -77,7 +85,12 @@ class ListWidget extends StatelessWidget {
 
 
 class BottomBarWidget extends StatelessWidget {
-  const BottomBarWidget({super.key});
+  final void Function(int) onTap;
+
+  const BottomBarWidget({
+    Key? key,
+    required this.onTap
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +100,6 @@ class BottomBarWidget extends StatelessWidget {
           icon: Icon(Icons.home_outlined),
           activeIcon: Icon(Icons.home),
           label: 'Accueil',
-
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.favorite_outline),
@@ -95,6 +107,7 @@ class BottomBarWidget extends StatelessWidget {
           label: 'Favoris',
         ),
       ],
+      onTap: onTap,
     );
   }
 }

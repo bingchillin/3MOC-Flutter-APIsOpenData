@@ -1,3 +1,4 @@
+import 'package:apis_open_data/favorites.dart';
 import 'package:apis_open_data/widgets/listing.dart';
 import 'package:apis_open_data/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -38,19 +39,31 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Interface',
       theme: darkTheme,
       home: const MyHomePage(),
-      initialRoute: '/',
+      initialRoute: MyHomePage.routeName,
       routes: {
-        Listing.routeName : (context) => const Listing(),
+        Favorites.routeName: (context) => const Listing(),
       },
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
+  static const String routeName = '/';
+
+
   const MyHomePage({super.key});
+
+  final _previousRoute = Navigator.defaultRouteName;
 
   @override
   Widget build(BuildContext context) {
+    void _onBottomLinkClicked(int val) {
+      Navigator.pushReplacementNamed(
+        context,
+        Favorites.routeName,
+      );
+    }
+
     return Scaffold(
       appBar: const AppBarWidget(),
       body: Column(
@@ -76,7 +89,9 @@ class MyHomePage extends StatelessWidget {
         ],
       ),
       // Barre de navigation ---------------------------------------------------
-      bottomNavigationBar: const BottomBarWidget(),
+      bottomNavigationBar: BottomBarWidget(
+        onTap: _onBottomLinkClicked,
+      ),
     );
   }
 }
