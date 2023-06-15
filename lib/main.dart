@@ -57,7 +57,7 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void _onBottomLinkClicked(int val) {
+    void onBottomLinkClicked(int val) {
       Navigator.pushReplacementNamed(
         context,
         Favorites.routeName,
@@ -90,7 +90,7 @@ class MyHomePage extends StatelessWidget {
       ),
       // Barre de navigation ---------------------------------------------------
       bottomNavigationBar: BottomBarWidget(
-        onTap: _onBottomLinkClicked,
+        onTap: onBottomLinkClicked,
       ),
     );
   }
