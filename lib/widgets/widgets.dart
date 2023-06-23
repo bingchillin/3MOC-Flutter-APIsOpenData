@@ -64,6 +64,7 @@ class SearchBarWidget extends StatelessWidget {
   }
 }
 
+// TO FIX : ne marche pas quand on appelle le widget
 class ListWidget extends StatelessWidget {
   const ListWidget({super.key});
 

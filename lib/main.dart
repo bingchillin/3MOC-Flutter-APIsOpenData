@@ -4,7 +4,7 @@ import 'package:apis_open_data/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -74,11 +74,14 @@ class MyHomePage extends StatelessWidget {
           // Barre de recherche ------------------------------------------------
           const SearchBarWidget(),
           // Liste -------------------------------------------------------------
+          // PROBLEME DE DOUBLONS : on duplique le code car le widget ne marche pas
           Expanded(
             child: ListView.builder(
               itemCount: 10,
               itemBuilder: (context, index) {
                 return ListTile(
+                  // Pour l'instant, on garde de côté pour l'appel api
+                  //leading: Image.network(),
                   title: Text('Élément $index'),
                   subtitle: Text('Sous-titre de l\'élément $index'),
                 );
