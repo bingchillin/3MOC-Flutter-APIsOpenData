@@ -1,6 +1,5 @@
 import 'package:apis_open_data/pages/favorites.dart';
 import 'package:apis_open_data/pages/home.dart';
-import 'package:apis_open_data/widgets/listing.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -41,7 +40,7 @@ class MyApp extends StatelessWidget {
       home: const MyHomePage(),
       initialRoute: MyHomePage.routeName,
       routes: {
-        Favorites.routeName: (context) => const Listing(),
+        Favorites.routeName: (context) => const Favorites(),
       },
     );
   }
