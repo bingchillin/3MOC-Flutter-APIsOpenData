@@ -9,8 +9,6 @@ class MyHomePage extends StatelessWidget {
 
   const MyHomePage({super.key});
 
-  final _previousRoute = Navigator.defaultRouteName;
-
   @override
   Widget build(BuildContext context) {
     void onBottomLinkClicked(int val) {
