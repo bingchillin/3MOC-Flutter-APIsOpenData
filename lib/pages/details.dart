@@ -3,7 +3,17 @@ import 'package:apis_open_data/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class DetailsWidget extends StatelessWidget {
-  const DetailsWidget({super.key});
+  static const String routeName = '/details';
+
+  final String title;
+  final String subtitle;
+  final String url;
+
+  const DetailsWidget(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +26,14 @@ class DetailsWidget extends StatelessWidget {
 
     return Scaffold(
       appBar: const AppBarWidget(),
-      body: const Column(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Titre + sous-titre ------------------------------------------------
-          TitleWidget(title: 'Détails,', subtitle: 'Détails de levent,'),
+          Center(
+            child: Image.network(url),
+          ),
+          const SizedBox(height: 15),
+          TitleWidget(title: title, subtitle: subtitle),
         ],
       ),
       // Barre de navigation ---------------------------------------------------

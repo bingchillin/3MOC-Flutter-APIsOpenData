@@ -7,27 +7,35 @@ class Listing extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded
-        (
-        child: ListView.builder(
-          itemCount: 20,
-          itemBuilder: (context, index) {
-            return ListTile(
-              leading: Image.network("https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"),
-              title: Text('Élément $index'),
-              subtitle: Text('Sous-titre de l\'élément $index'),
-              onTap: () {
-                // Naviguer vers la page des détails avec les paramètres title et subtitle
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DetailsWidget(),
+    return Expanded(
+      child: ListView.builder(
+        itemCount: 20,
+        itemBuilder: (context, index) {
+          final title = 'Élément $index';
+          final subtitle = 'Sous-titre de l\'élément $index';
+          const url = "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA";
+
+          return ListTile(
+            leading: Image.network(url),
+            title: Text(title),
+            subtitle: Text(subtitle),
+
+            //Accéder à la page de détails -------------------------------------
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DetailsWidget(
+                    title: title,
+                    subtitle: subtitle,
+                    url: url,
                   ),
-                );
-              },
-            );
-          },
-        ),
-      );
+                ),
+              );
+            },
+          );
+        },
+      ),
+    );
   }
 }
