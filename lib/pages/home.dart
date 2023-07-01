@@ -25,12 +25,11 @@ class MyHomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Titre + sous-titre ------------------------------------------------
-          TitleWidget(),
+          TitleWidget(title: 'Bonjour,', subtitle: 'Recherchez une sortie, un concert ou un évènement',),
           // Barre de recherche ------------------------------------------------
           SearchBarWidget(),
           // Liste -------------------------------------------------------------
           Listing(),
-          //const ListWidget(),
         ],
       ),
       // Barre de navigation ---------------------------------------------------

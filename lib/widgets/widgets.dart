@@ -15,7 +15,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class TitleWidget extends StatelessWidget {
-  const TitleWidget({super.key});
+  final String title, subtitle;
+
+  const TitleWidget({super.key, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,8 @@ class TitleWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Bonjour,',
+            //'Bonjour,',
+            title,
             style: Theme
                 .of(context)
                 .textTheme
@@ -35,7 +38,8 @@ class TitleWidget extends StatelessWidget {
           ),
           const SizedBox(height: 15),
           Text(
-            'Recherchez une sortie, un concert ou un évènement',
+            //'Recherchez une sortie, un concert ou un évènement',
+            subtitle,
             style: Theme
                 .of(context)
                 .textTheme
@@ -63,27 +67,6 @@ class SearchBarWidget extends StatelessWidget {
     );
   }
 }
-
-// TO FIX : ne marche pas quand on appelle le widget
-class ListWidget extends StatelessWidget {
-  const ListWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text('Élément $index'),
-            subtitle: Text('Sous-titre de l\'élément $index'),
-          );
-        },
-      ),
-    );
-  }
-}
-
 
 class BottomBarWidget extends StatelessWidget {
   final void Function(int) onTap;
