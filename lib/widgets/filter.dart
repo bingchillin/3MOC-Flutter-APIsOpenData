@@ -8,6 +8,7 @@ class FilterWidget extends StatefulWidget {
 }
 
 class _FilterWidgetState extends State<FilterWidget> {
+  // Liste random
   final List<Map<String, dynamic>> _allEvents = [
     {"id": 1, "title": "Paris", "subtitle": 75012},
     {"id": 2, "title": "Lyon", "subtitle": 00},
@@ -18,10 +19,10 @@ class _FilterWidgetState extends State<FilterWidget> {
     {"id": 7, "title": "Oignon", "subtitle": 30},
     {"id": 8, "title": "Banana", "subtitle": 14},
     {"id": 9, "title": "Dooferschmitt", "subtitle": 100},
-    {"id": 10, "title": "Becky", "subtitle": 32},
+    {"id": 10, "title": "Kanye Paris", "subtitle": 32},
   ];
 
-  // This list holds the data for the list view
+  // Liste vide pour stocker les résultats de la recherche
   List<Map<String, dynamic>> _foundEvents = [];
 
   @override
@@ -30,18 +31,19 @@ class _FilterWidgetState extends State<FilterWidget> {
     super.initState();
   }
 
-  // This function is called whenever the text field changes
+  // Fonction de filtre, appelée à chaque changement dans le TextField
   void _runFilter(String enteredKeyword) {
     List<Map<String, dynamic>> results = [];
+    // Affichage de tous les events si le champ de recherche est vide
     if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
       results = _allEvents;
     } else {
       results = _allEvents
-          .where((event) =>
-              event["title"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .where((event) => event["title"]
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
           .toList();
-      // we use the toLowerCase() method to make it case-insensitive
+      // toLowerCase() pour rendre la recherche insensible à la casse
     }
 
     setState(() {
@@ -68,24 +70,30 @@ class _FilterWidgetState extends State<FilterWidget> {
               height: 20,
             ),
             Expanded(
+              // Ternaire pour afficher la liste des résultats ou un message si aucun résultat
               child: _foundEvents.isNotEmpty
                   ? ListView.builder(
                       itemCount: _foundEvents.length,
                       itemBuilder: (context, index) => ListTile(
+                        // Id---------------------------------------------------
                         leading: Text(
                           _foundEvents[index]["id"].toString(),
                           style: const TextStyle(
                               fontSize: 24, color: Colors.white),
                         ),
+
+                        // Titre de l'event-------------------------------------
                         title: Text(_foundEvents[index]['title'],
                             style: Theme.of(context).textTheme.titleLarge),
+
+                        // Sous-titre de l'event--------------------------------
                         subtitle: Text(
                             _foundEvents[index]["subtitle"].toString(),
                             style: Theme.of(context).textTheme.titleMedium),
                       ),
                     )
                   : Text(
-                      'No results found',
+                      'Aucun évènement trouvé',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
             ),
