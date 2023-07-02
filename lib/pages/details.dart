@@ -29,7 +29,10 @@ class DetailsWidget extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
+          // Image MAIS je n'arrive pas à size l'image pour qu'elle prenne toute la largeur
+          SizedBox(
+            width: double.infinity,
+            height: 200,
             child: Image.network(url),
           ),
           const SizedBox(height: 15),
