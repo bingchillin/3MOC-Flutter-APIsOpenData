@@ -1,5 +1,5 @@
 import 'package:apis_open_data/pages/favorites.dart';
-import 'package:apis_open_data/widgets/listing.dart';
+import 'package:apis_open_data/widgets/filter.dart';
 import 'package:flutter/material.dart';
 import 'package:apis_open_data/widgets/widgets.dart';
 
@@ -27,9 +27,9 @@ class MyHomePage extends StatelessWidget {
           // Titre + sous-titre ------------------------------------------------
           TitleWidget(title: 'Bonjour,', subtitle: 'Recherchez une sortie, un concert ou un évènement',),
           // Barre de recherche ------------------------------------------------
-          SearchBarWidget(),
+          //SearchBarWidget(),
           // Liste -------------------------------------------------------------
-          Listing(),
+          FilterWidget(),
         ],
       ),
       // Barre de navigation ---------------------------------------------------
