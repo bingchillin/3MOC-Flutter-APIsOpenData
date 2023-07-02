@@ -66,7 +66,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             TextField(
               onChanged: (value) => _runFilter(value),
               decoration: const InputDecoration(
-                  labelText: 'Search', suffixIcon: Icon(Icons.search)),
+                  labelText: 'Nom de l\'évènement...', suffixIcon: Icon(Icons.search)),
             ),
             const SizedBox(
               height: 20,

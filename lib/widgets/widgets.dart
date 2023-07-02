@@ -60,7 +60,7 @@ class SearchBarWidget extends StatelessWidget {
       padding: EdgeInsets.all(16),
       child: TextField(
         decoration: InputDecoration(
-            hintText: 'Adresse, date...',
+            hintText: 'Nom de l\'évènement...',
             suffixIcon: Icon(Icons.search)
         ),
       ),
