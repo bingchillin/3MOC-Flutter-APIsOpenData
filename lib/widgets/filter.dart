@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../pages/details.dart';
+
 class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key}) : super(key: key);
 
@@ -10,16 +12,16 @@ class FilterWidget extends StatefulWidget {
 class _FilterWidgetState extends State<FilterWidget> {
   // Liste random
   final List<Map<String, dynamic>> _allEvents = [
-    {"id": 1, "title": "Paris", "subtitle": 75012},
-    {"id": 2, "title": "Lyon", "subtitle": 00},
-    {"id": 3, "title": "Marseille", "subtitle": 13},
-    {"id": 4, "title": "Woippy", "subtitle": 56},
-    {"id": 5, "title": "Candy", "subtitle": 21},
-    {"id": 6, "title": "Croustibat", "subtitle": 55},
-    {"id": 7, "title": "Oignon", "subtitle": 30},
-    {"id": 8, "title": "Banana", "subtitle": 14},
-    {"id": 9, "title": "Dooferschmitt", "subtitle": 100},
-    {"id": 10, "title": "Kanye Paris", "subtitle": 32},
+    {"id": 1, "title": "Paris", "subtitle": 75012, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 2, "title": "Lyon", "subtitle": 00, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 3, "title": "Marseille", "subtitle": 13, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 4, "title": "Woippy", "subtitle": 56, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 5, "title": "Candy", "subtitle": 21, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 6, "title": "Croustibat", "subtitle": 55, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 7, "title": "Oignon", "subtitle": 30, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 8, "title": "Banana", "subtitle": 14, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 9, "title": "Dooferschmitt", "subtitle": 100, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
+    {"id": 10, "title": "Kanye Paris", "subtitle": 32, "url": "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA"},
   ];
 
   // Liste vide pour stocker les résultats de la recherche
@@ -76,20 +78,28 @@ class _FilterWidgetState extends State<FilterWidget> {
                       itemCount: _foundEvents.length,
                       itemBuilder: (context, index) => ListTile(
                         // Id---------------------------------------------------
-                        leading: Text(
-                          _foundEvents[index]["id"].toString(),
-                          style: const TextStyle(
-                              fontSize: 24, color: Colors.white),
-                        ),
+                        leading: Image.network(_foundEvents[index]['url'].toString()),
 
                         // Titre de l'event-------------------------------------
-                        title: Text(_foundEvents[index]['title'],
+                        title: Text(_foundEvents[index]['title'].toString(),
                             style: Theme.of(context).textTheme.titleLarge),
 
                         // Sous-titre de l'event--------------------------------
                         subtitle: Text(
                             _foundEvents[index]["subtitle"].toString(),
                             style: Theme.of(context).textTheme.titleMedium),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailsWidget(
+                                title: _foundEvents[index]['title'].toString(),
+                                subtitle: _foundEvents[index]['subtitle'].toString(),
+                                url: _foundEvents[index]['url'].toString(),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     )
                   : Text(

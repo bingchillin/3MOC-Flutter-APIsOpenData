@@ -11,9 +11,9 @@ class Listing extends StatelessWidget {
       child: ListView.builder(
         itemCount: 20,
         itemBuilder: (context, index) {
-          final title = 'Élément $index';
-          final subtitle = 'Sous-titre de l\'élément $index';
-          const url = "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA";
+          final String title = 'Élément $index';
+          final String subtitle = 'Sous-titre de l\'élément $index';
+          const String url = "https://fastly.picsum.photos/id/1047/200/300.jpg?blur=5&hmac=o8e3RqTLsttzlMCBtvlGmuwSXFJqhhWQ6Wrgdb5QltA";
 
           return ListTile(
             leading: Image.network(url),
