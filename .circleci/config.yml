@@ -8,5 +8,6 @@ jobs:
       - image: ghcr.io/cirruslabs/flutter:latest
     steps:
       - checkout
+      - run: ls -la
       - run: dart run discord_script.dart
 
