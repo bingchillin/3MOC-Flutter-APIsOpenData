@@ -8,6 +8,6 @@ jobs:
       - image: cirrusci/flutter
     steps:
       - checkout
-      - run: flutter pub upgrade
+      - run: flutter doctor
       - run: dart run discord-send-message
 
