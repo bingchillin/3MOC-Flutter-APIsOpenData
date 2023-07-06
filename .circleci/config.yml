@@ -2,7 +2,9 @@ version: 2.1
 
 jobs:
   build:
-    docker:
+    environment:
+      DART_SDK: stable
+    docker: 
       - image: cirrusci/flutter
     steps:
       - checkout
