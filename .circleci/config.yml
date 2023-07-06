@@ -9,5 +9,6 @@ jobs:
     steps:
       - checkout
       - run: flutter doctor
+      - run: flutter channel
       - run: dart run discord-send-message
 
