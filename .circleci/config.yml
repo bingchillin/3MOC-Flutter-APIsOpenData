@@ -8,6 +8,5 @@ jobs:
       - image: ghcr.io/cirruslabs/flutter:latest
     steps:
       - checkout
-      - run: flutter doctor
       - run: dart run discord-send-message.dart
 
