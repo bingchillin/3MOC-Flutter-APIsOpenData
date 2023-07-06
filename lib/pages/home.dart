@@ -1,7 +1,9 @@
 import 'package:apis_open_data/pages/favorites.dart';
 import 'package:apis_open_data/widgets/filter.dart';
 import 'package:flutter/material.dart';
-import 'package:apis_open_data/widgets/widgets.dart';
+import 'package:apis_open_data/widgets/app_bar.dart';
+import 'package:apis_open_data/widgets/title.dart';
+import 'package:apis_open_data/widgets/bottom_bar.dart';
 
 
 class MyHomePage extends StatelessWidget {
