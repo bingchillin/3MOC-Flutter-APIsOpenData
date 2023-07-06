@@ -28,3 +28,20 @@ class BottomBarWidget extends StatelessWidget {
     );
   }
 }
+
+class Material3NavigationBar extends StatefulWidget {
+  const Material3NavigationBar({super.key});
+
+  @override
+  State<Material3NavigationBar> createState() => _Material3NavigationBarState();
+}
+
+class _Material3NavigationBarState extends State<Material3NavigationBar> {
+  @override
+  Widget build(BuildContext context) {
+    return NavigationBar(destinations: [
+      NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
+      NavigationDestination(icon: Icon(Icons.favorite), label: 'Favoris'),
+    ]);
+  }
+}

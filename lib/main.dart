@@ -1,5 +1,6 @@
 import 'package:apis_open_data/pages/favorites.dart';
 import 'package:apis_open_data/pages/home.dart';
+import 'package:apis_open_data/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Interface',
       theme: darkTheme,
-      home: const MyHomePage(),
+      home: const MyNavigationWidget(),
       initialRoute: MyHomePage.routeName,
       routes: {
         Favorites.routeName: (context) => const Favorites(),
@@ -46,3 +47,36 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyNavigationWidget extends StatefulWidget {
+  const MyNavigationWidget({super.key});
+
+  @override
+  State<MyNavigationWidget> createState() => _MyNavigationWidgetState();
+}
+
+class _MyNavigationWidgetState extends State<MyNavigationWidget> {
+  int currentPageIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const AppBarWidget(),
+      body: [
+        MyHomePage(),
+        Favorites(),
+      ][currentPageIndex],
+      // Barre de navigation ---------------------------------------------------
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
+          NavigationDestination(icon: Icon(Icons.favorite), label: 'Favoris'),
+        ],
+        onDestinationSelected: (index) {
+          setState(() {
+            currentPageIndex = index;
+          });
+        },
+      ),
+    );
+  }
+}
