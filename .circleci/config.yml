@@ -7,6 +7,10 @@ jobs:
     docker: 
       - image: ghcr.io/cirruslabs/flutter:latest
     steps:
+      - run:
+          name: Install Dependencies
+          command: flutter pub get
+
       - checkout
       - run: ls -la
       - run: dart run discord_script.dart
