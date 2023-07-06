@@ -62,8 +62,8 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
     return Scaffold(
       appBar: const AppBarWidget(),
       body: [
-        MyHomePage(),
-        Favorites(),
+        const MyHomePage(),
+        const Favorites(),
       ][currentPageIndex],
       // Barre de navigation ---------------------------------------------------
       bottomNavigationBar: NavigationBar(
@@ -71,6 +71,7 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
           NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
           NavigationDestination(icon: Icon(Icons.favorite), label: 'Favoris'),
         ],
+        selectedIndex: currentPageIndex,
         onDestinationSelected: (index) {
           setState(() {
             currentPageIndex = index;
