@@ -6,6 +6,6 @@ jobs:
       - image: cirrusci/flutter
     steps:
       - checkout
-      - run: flutter doctor
+      - run: flutter pub upgrade
       - run: dart run discord-send-message
 
