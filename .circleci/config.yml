@@ -5,7 +5,7 @@ jobs:
     environment:
       DART_SDK: stable
     docker: 
-      - image: cirruslabs/flutter
+      - image: ghcr.io/cirruslabs/flutter:latest
     steps:
       - checkout
       - run: flutter doctor
