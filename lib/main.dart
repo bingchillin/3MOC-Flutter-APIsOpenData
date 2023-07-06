@@ -68,10 +68,17 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
       // Barre de navigation ---------------------------------------------------
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Accueil'),
-          NavigationDestination(icon: Icon(Icons.favorite), label: 'Favoris'),
+          NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'Accueil'),
+          NavigationDestination(
+              icon: Icon(Icons.favorite_outline),
+              selectedIcon: Icon(Icons.favorite),
+              label: 'Favoris'),
         ],
         selectedIndex: currentPageIndex,
+        animationDuration: const Duration(milliseconds: 200),
         onDestinationSelected: (index) {
           setState(() {
             currentPageIndex = index;
