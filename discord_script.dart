@@ -5,7 +5,7 @@ void main() {
 }
 
 void sendDiscordMessage() async {
-  String url = 'https://discord.com/api/webhooks/your_webhook_url';
+  String url = 'https://discord.com/api/webhooks/1126240339582259331/uYs7XrwLOderBCt-ru3dr4wcl9mXg6roDNRbmWIVAEg8SegfiMKZOFtB1rA86JEMQSub';
   String message = 'Si ça marche j\'insulte Kenny' ;
 
   final response = await http.post(
