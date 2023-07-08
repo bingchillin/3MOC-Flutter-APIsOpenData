@@ -1,9 +1,6 @@
 version: 2.1
 
-
 # Config 1 : Build APK
-
-
 jobs:
   build:
     environment:
@@ -28,3 +25,25 @@ jobs:
       - store_artifacts:
           path: build/app/outputs/apk/
 
+# Config 2: Script Discord + Linter
+
+jobs_check:
+  build:
+    environment:
+      DART_SDK: stable
+    docker:
+      - image: ghcr.io/cirruslabs/flutter:latest
+    steps:
+      - checkout
+
+      - run:
+          name: Install Dependencies
+          command: flutter pub get
+
+      - run:
+          name: Send Discord Message
+          command: dart run discord_script.dart
+
+      - run:
+          name: Run Flutter Linter
+          command: flutter analyze
