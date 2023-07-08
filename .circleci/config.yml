@@ -1,5 +1,9 @@
 version: 2.1
 
+
+# Config 1 : Build APK
+
+
 jobs:
   build:
     environment:
@@ -13,12 +17,6 @@ jobs:
       - run:
           name: Install Dependencies
           command: flutter pub get
-          
-      #- run: dart run discord_script.dart
-      
-      #- run:
-          #name: Run Flutter Linter
-          #command: flutter analyze
 
       - run:
           name: Update Android SDK
