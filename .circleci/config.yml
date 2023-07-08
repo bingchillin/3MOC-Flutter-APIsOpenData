@@ -16,7 +16,17 @@ jobs:
           
       #- run: dart run discord_script.dart
       
+      #- run:
+          #name: Run Flutter Linter
+          #command: flutter analyze
+
       - run:
-          name: Run Flutter Linter
-          command: flutter analyze
+          name: Update Android SDK
+          command: sdkmanager --update
+      
+      - run:
+          name: Build APK
+          command: flutter build apk
+      - store_artifacts:
+          path: build/app/outputs/apk/
 
