@@ -12,15 +12,19 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        TextButton(
+          onPressed: () => throw Exception('Test Crash'),
+          child: const Text('Crash'),
+        ),
         // Titre + sous-titre ------------------------------------------------
-        TitleWidget(title: 'Bonjour,', subtitle: 'Recherchez une sortie, un concert ou un évènement',),
+        const TitleWidget(title: 'Bonjour,', subtitle: 'Recherchez une sortie, un concert ou un évènement',),
         // Barre de recherche ------------------------------------------------
         //SearchBarWidget(),
         // Liste -------------------------------------------------------------
-        FilterWidget(),
+        const FilterWidget(),
       ],
     );
   }
