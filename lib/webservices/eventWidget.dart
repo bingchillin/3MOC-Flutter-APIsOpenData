@@ -18,24 +18,24 @@ class _EventWidgetState extends State<EventWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: FutureBuilder<List<Event>>(
-          future: EventWebServices.getAllEvents(),
-          builder: (context, AsyncSnapshot<List<Event>> snapShot) {
-            if (snapShot.hasError) {
-              return const Center(
-                child: Text('Erreur'),
-              );
+      child: FutureBuilder<List<Event>>(
+        future: EventWebServices.getAllEvents(),
+        builder: (context, AsyncSnapshot<List<Event>> snapShot) {
+          if (snapShot.hasError) {
+            return const Center(
+              child: Text('Erreur'),
+            );
+          }
+
+          if (snapShot.hasData) {
+            final events = snapShot.data;
+            if (events == null || events.isEmpty) {
+              return const Center(child: Text('No events'));
             }
 
-            if (snapShot.hasData) {
-              final events = snapShot.data;
-              if (events == null || events.isEmpty) {
-                return const Center(child: Text('No events'));
-              }
-
-              return Column(
+            return Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
                 children: [
                   const SizedBox(
                     height: 20,
@@ -50,48 +50,48 @@ class _EventWidgetState extends State<EventWidget> {
                     height: 20,
                   ),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: events.length,
-                      itemBuilder: (context, index) {
-                        final event = events[index];
-                        return ListTile(
-                          leading: Image.network(url),
-                          title: Text(event.title,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .titleLarge),
-                          subtitle: Text(event.dateStart,
-                              style: Theme
-                                  .of(context)
-                                  .textTheme
-                                  .titleSmall),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    DetailsWidget(
-                                      title: events[index].title,
-                                      subtitle: events[index].dateStart,
-                                      url: url,
+                    child: events.isNotEmpty
+                        ? ListView.builder(
+                            itemCount: events.length,
+                            itemBuilder: (context, index) {
+                              final event = events[index];
+                              return ListTile(
+                                leading: Image.network(url),
+                                title: Text(event.title,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge),
+                                subtitle: Text(event.dateStart,
+                                    style:
+                                        Theme.of(context).textTheme.titleSmall),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsWidget(
+                                        title: events[index].title,
+                                        subtitle: events[index].dateStart,
+                                        url: url,
+                                      ),
                                     ),
-                              ),
-                            );
-                          },
-                        );
-                      },
-                    ),
+                                  );
+                                },
+                              );
+                            },
+                          )
+                        : Text(
+                            'Aucun évènement trouvé',
+                            style: Theme.of(context).textTheme.titleLarge,
+                          ),
                   ),
                 ],
-              );
-            }
-
-            return const Center(
-              child: CircularProgressIndicator(),
+              ),
             );
-          },
-        ),
+          }
+
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
       ),
     );
   }
