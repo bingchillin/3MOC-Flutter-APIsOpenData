@@ -43,6 +43,22 @@ jobs:
           name: Run Flutter Linter
           command: flutter analyze
 
+  test:
+    environment:
+      DART_SDK: stable
+    docker:
+      - image: ghcr.io/cirruslabs/flutter:latest
+    steps:
+      - checkout
+
+      - run:
+          name: Install Dependencies
+          command: flutter pub get
+
+      - run:
+          name: Run Our test
+          command: flutter test lib/widgets/title.dart
+
 workflows:
   build:   
     jobs:
@@ -50,3 +66,6 @@ workflows:
   check:      
     jobs:      
       - check
+  test:
+    jobs:
+      - test
