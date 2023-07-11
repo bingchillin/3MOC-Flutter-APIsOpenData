@@ -1,12 +1,37 @@
+import 'dart:ui';
+
 import 'package:apis_open_data/pages/favorites.dart';
 import 'package:apis_open_data/pages/home.dart';
+import 'package:apis_open_data/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  FlutterError.onError = (errorDetails){
+    FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+  };
+
+  PlatformDispatcher.instance.onError = (error,stack){
+    FirebaseCrashlytics.instance.recordError(error,stack);
+    return true;
+  };
+
   runApp(const MyApp());
+
+
 }
 
 class MyApp extends StatelessWidget {
+
   final MaterialColor customColor = const MaterialColor(
     0xFF9AE19D,
     <int, Color>{
@@ -37,7 +62,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Interface',
       theme: darkTheme,
-      home: const MyHomePage(),
+      home: const MyNavigationWidget(),
       initialRoute: MyHomePage.routeName,
       routes: {
         Favorites.routeName: (context) => const Favorites(),
@@ -46,3 +71,56 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MyNavigationWidget extends StatefulWidget {
+  const MyNavigationWidget({super.key});
+
+  @override
+  State<MyNavigationWidget> createState() => _MyNavigationWidgetState();
+}
+
+class _MyNavigationWidgetState extends State<MyNavigationWidget> {
+  int currentPageIndex = 0;
+
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: const AppBarWidget(),
+      body: [
+        const MyHomePage(),
+        const Favorites(),
+      ][currentPageIndex],
+      // Barre de navigation ---------------------------------------------------
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(
+              icon: Icon(Icons.home_outlined),
+              selectedIcon: Icon(Icons.home),
+              label: 'Accueil'),
+          NavigationDestination(
+              icon: Icon(Icons.favorite_outline),
+              selectedIcon: Icon(Icons.favorite),
+              label: 'Favoris'),
+        ],
+        selectedIndex: currentPageIndex,
+        animationDuration: const Duration(milliseconds: 200),
+        onDestinationSelected: (index) async {
+
+          await analytics.logEvent(
+            name: 'navigation_widget_pressed',
+            parameters: <String, dynamic>{
+              'selected_index': index,
+            },
+          );
+
+          setState(() {
+            currentPageIndex = index;
+          });
+
+
+        },
+      ),
+    );
+  }
+}

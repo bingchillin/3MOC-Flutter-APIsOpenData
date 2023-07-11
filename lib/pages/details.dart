@@ -1,6 +1,10 @@
-import 'package:apis_open_data/pages/home.dart';
-import 'package:apis_open_data/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+
+import 'package:firebase_analytics/firebase_analytics.dart';
+
+import 'package:apis_open_data/widgets/title.dart';
+import 'package:apis_open_data/widgets/app_bar.dart';
+
 
 class DetailsWidget extends StatelessWidget {
   static const String routeName = '/details';
@@ -17,12 +21,7 @@ class DetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void onBottomLinkClicked(int val) {
-      Navigator.pushReplacementNamed(
-        context,
-        MyHomePage.routeName,
-      );
-    }
+    analytics.setCurrentScreen(screenName: routeName);
 
     return Scaffold(
       appBar: const AppBarWidget(),
@@ -38,10 +37,6 @@ class DetailsWidget extends StatelessWidget {
           const SizedBox(height: 15),
           TitleWidget(title: title, subtitle: subtitle),
         ],
-      ),
-      // Barre de navigation ---------------------------------------------------
-      bottomNavigationBar: BottomBarWidget(
-        onTap: onBottomLinkClicked,
       ),
     );
   }

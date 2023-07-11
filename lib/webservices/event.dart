@@ -6,6 +6,8 @@ class Event {
   final String coverUrl;
   final String address;
 
+
+
   Event({
     required this.title,
     required this.dateStart,
@@ -17,12 +19,12 @@ class Event {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      title: json['fields']['title'] as String,
-      dateStart: json['fields']['date_start'] as String,
-      dateEnd: json['fields']['date_end'] as String,
-      description: json['fields']['description'] as String,
-      coverUrl: json['fields']['cover_url'] as String,
-      address: json['fields']['address_text'] as String,
+      title: json['fields']['title'] != null ? json['fields']['title'] as String : '',
+      dateStart: json['fields']['date_start'] != null ? json['fields']['date_start'] as String : '',
+      dateEnd: json['fields']['date_end'] != null ? json['fields']['date_end'] as String : '',
+      description: json['fields']['description'] != null ? json['fields']['description'] as String : '',
+      coverUrl: json['fields']['cover_url'] != null ? json['fields']['cover_url'] as String : '',
+      address: json['fields']['address_text'] != null ? json['fields']['address_text'] as String : '',
     );
   }
 
