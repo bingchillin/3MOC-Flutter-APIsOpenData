@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
   sendDiscordMessage();
 }
 
-void sendDiscordMessage() async {
+Future<int> sendDiscordMessage() async {
   String url = 'https://discord.com/api/webhooks/1126240339582259331/uYs7XrwLOderBCt-ru3dr4wcl9mXg6roDNRbmWIVAEg8SegfiMKZOFtB1rA86JEMQSub';
   String message = 'https://tenor.com/view/goat-standing-cursed-silvagunner-gif-23443759' ;
 
@@ -15,8 +14,10 @@ void sendDiscordMessage() async {
   );
 
   if (response.statusCode == 200 || response.statusCode == 204) {
-    debugPrint('Message sent to Discord successfully!');
+    // print('Message sent to Discord successfully!');
+    return 0;
   } else {
-    debugPrint('Failed to send message to Discord. Status code: ${response.statusCode}');
+    // print('Failed to send message to Discord. Status code: ${response.statusCode}');
+    return response.statusCode;
   }
 }
