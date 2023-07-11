@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:444627893126:android:13922cc278b3557b170a07",
         "android_client_info": {
-          "package_name": "com.example.apis_open_data"
+          "package_name": "com.esgistudentskmi.apis_open_data"
         }
       },
       "oauth_client": [
@@ -34,7 +34,7 @@
               "client_id": "444627893126-nbsmufrmiltre62rqumb2g547f3hm94q.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.apisOpenData"
+                "bundle_id": "com.esgistudentskmi.apisOpenData"
               }
             }
           ]
