@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_test/flutter_test.dart';
 
 class TitleWidget extends StatelessWidget {
   final String title, subtitle;
@@ -37,3 +38,16 @@ class TitleWidget extends StatelessWidget {
     );
   }
 }
+
+void main() {
+  testWidgets("Test that the title widget has correct content", (widgetTester) async {
+    await widgetTester.pumpWidget(const MaterialApp(home: TitleWidget(title: "toto", subtitle: "tata"),));
+
+    final titleFinder = find.text("toto");
+    final subTitleFinder = find.text("tata");
+
+    expect(titleFinder, findsOneWidget);
+    expect(subTitleFinder, findsOneWidget);
+  });
+}
+
