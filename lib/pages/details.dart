@@ -1,16 +1,43 @@
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 
-FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+import 'package:firebase_analytics/firebase_analytics.dart';
 
-class Details extends StatelessWidget {
+import 'package:apis_open_data/widgets/title.dart';
+import 'package:apis_open_data/widgets/app_bar.dart';
+
+
+class DetailsWidget extends StatelessWidget {
   static const String routeName = '/details';
 
-  const Details({required Key key}) : super(key: key);
+  final String title;
+  final String subtitle;
+  final String url;
+
+  const DetailsWidget(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.url});
 
   @override
   Widget build(BuildContext context) {
     analytics.setCurrentScreen(screenName: routeName);
-    return const Placeholder();
+
+    return Scaffold(
+      appBar: const AppBarWidget(),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Image MAIS je n'arrive pas à size l'image pour qu'elle prenne toute la largeur
+          SizedBox(
+            width: double.infinity,
+            height: 200,
+            child: Image.network(url),
+          ),
+          const SizedBox(height: 15),
+          TitleWidget(title: title, subtitle: subtitle),
+        ],
+      ),
+    );
   }
 }
