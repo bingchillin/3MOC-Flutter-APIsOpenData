@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:firebase_analytics/firebase_analytics.dart';
-
 import 'package:apis_open_data/widgets/title.dart';
 import 'package:apis_open_data/widgets/app_bar.dart';
 
@@ -21,7 +18,6 @@ class DetailsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    analytics.setCurrentScreen(screenName: routeName);
 
     return Scaffold(
       appBar: const AppBarWidget(),
