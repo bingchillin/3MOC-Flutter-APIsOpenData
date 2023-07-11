@@ -1,4 +1,4 @@
-import 'package:apis_open_data/widgets/filter.dart';
+import 'package:apis_open_data/webservices/eventWidget.dart';
 import 'package:flutter/material.dart';
 import 'package:apis_open_data/widgets/title.dart';
 
@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
         // Barre de recherche ------------------------------------------------
         //SearchBarWidget(),
         // Liste -------------------------------------------------------------
-        const FilterWidget(),
+        const EventWidget(),
       ],
     );
   }

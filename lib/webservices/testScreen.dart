@@ -87,7 +87,7 @@ class _WebServicesHomeState extends State<WebServicesHome> {
       itemBuilder: (context, index) {
         final event = _events[index];
         return ListTile(
-          title: Text('${event.title}'),
+          title: Text(event.title),
         );
       },
     );
