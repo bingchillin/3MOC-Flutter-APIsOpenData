@@ -38,10 +38,10 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_analytics: ^10.4.3
   firebase_crashlytics: ^3.3.3
-
-dev_dependencies:
   flutter_test:
     sdk: flutter
+
+dev_dependencies:
   integration_test:
     sdk: flutter
 

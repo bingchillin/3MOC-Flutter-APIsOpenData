@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
@@ -14,8 +15,8 @@ void sendDiscordMessage() async {
   );
 
   if (response.statusCode == 200 || response.statusCode == 204) {
-    print('Message sent to Discord successfully!');
+    debugPrint('Message sent to Discord successfully!');
   } else {
-    print('Failed to send message to Discord. Status code: ${response.statusCode}');
+    debugPrint('Failed to send message to Discord. Status code: ${response.statusCode}');
   }
 }

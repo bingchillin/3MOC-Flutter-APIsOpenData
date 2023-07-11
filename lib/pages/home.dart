@@ -1,4 +1,4 @@
-import 'package:apis_open_data/webservices/eventWidget.dart';
+import 'package:apis_open_data/webservices/event_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:apis_open_data/widgets/title.dart';
 

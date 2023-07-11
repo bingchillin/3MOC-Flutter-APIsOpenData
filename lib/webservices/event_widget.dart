@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:apis_open_data/webservices/event.dart';
-import 'package:apis_open_data/webservices/eventWebservice.dart';
+import 'package:apis_open_data/webservices/event_webservice.dart';
 
 import '../pages/details.dart';
 

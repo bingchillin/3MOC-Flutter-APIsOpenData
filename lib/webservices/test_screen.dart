@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:apis_open_data/webservices/event.dart';
-import 'package:apis_open_data/webservices/eventWebservice.dart';
-import 'package:apis_open_data/webservices/eventWidget.dart';
+import 'package:apis_open_data/webservices/event_webservice.dart';
+import 'package:apis_open_data/webservices/event_widget.dart';
 
 void main() {
   runApp(const MyApp());
