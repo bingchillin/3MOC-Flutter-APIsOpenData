@@ -56,7 +56,7 @@ class _EventWidgetState extends State<EventWidget> {
                             itemBuilder: (context, index) {
                               final event = events[index];
                               return ListTile(
-                                leading: Image.network(url),
+                                leading: Image.network(event.coverUrl),
                                 title: Text(event.title,
                                     style:
                                         Theme.of(context).textTheme.titleLarge),
@@ -64,16 +64,7 @@ class _EventWidgetState extends State<EventWidget> {
                                     style:
                                         Theme.of(context).textTheme.titleSmall),
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailsWidget(
-                                        title: events[index].title,
-                                        subtitle: events[index].dateStart,
-                                        url: url,
-                                      ),
-                                    ),
-                                  );
+                                  _onTapDetails(event);
                                 },
                               );
                             },
@@ -92,6 +83,19 @@ class _EventWidgetState extends State<EventWidget> {
             child: CircularProgressIndicator(),
           );
         },
+      ),
+    );
+  }
+
+  void _onTapDetails(Event event) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetailsWidget(
+          title: event.title,
+          subtitle: event.dateStart,
+          url: event.coverUrl,
+        ),
       ),
     );
   }
