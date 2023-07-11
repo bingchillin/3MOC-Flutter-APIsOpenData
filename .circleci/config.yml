@@ -1,0 +1,52 @@
+version: 2.1
+
+jobs:
+  build: 
+    environment:
+      DART_SDK: stable
+    docker:
+      - image: ghcr.io/cirruslabs/flutter:latest      
+    steps:
+      - checkout
+      
+      - run: 
+           name: Install Dependencies
+           command: flutter pub get  
+
+      - run: 
+          name: Update Android SDK          
+          command: sdkmanager --update  
+      
+      - run: 
+          name: Build APK           
+          command: flutter build apk            
+      - store_artifacts:
+          path: build/app/outputs/apk/        
+
+  check:   
+    environment:      
+      DART_SDK: stable
+    docker:      
+      - image: ghcr.io/cirruslabs/flutter:latest       
+    steps:
+      - checkout          
+      
+      - run:  
+          name: Install Dependencies
+          command: flutter pub get          
+      
+      - run:
+          name: Send Discord Message      
+          command: dart run discord_script.dart                   
+
+      - run:    
+          name: Run Flutter Linter
+          command: flutter analyze
+
+workflows:
+  build:   
+    jobs:
+      - build   
+  check:      
+    jobs:      
+      - check

@@ -1,0 +1,26 @@
+version: 2.1
+
+
+# Config 2 : discord script + Linter
+
+
+jobs:
+  build:
+    environment:
+      DART_SDK: stable
+    docker:
+      - image: ghcr.io/cirruslabs/flutter:latest
+    steps:
+      - checkout
+
+      - run:
+          name: Install Dependencies
+          command: flutter pub get
+
+      - run:
+        name: Send Discord Message
+        command: dart run discord_script.dart
+
+      - run:
+          name: Run Flutter Linter
+          command: flutter analyze
