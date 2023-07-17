@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: EventWidget(),
+      home: EventWidget(filter: {},),
     );
   }
 }
@@ -40,7 +40,7 @@ class _WebServicesHomeState extends State<WebServicesHome> {
 
   void _init() async {
     try {
-      final events = await EventWebServices.getAllEvents();
+      final events = await EventWebServices.getAllEvents(filter: null);
       setState(() {
         _loading = false;
         _events.addAll(events);

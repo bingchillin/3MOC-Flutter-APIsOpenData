@@ -15,22 +15,19 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  FlutterError.onError = (errorDetails){
+  FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
   };
 
-  PlatformDispatcher.instance.onError = (error,stack){
-    FirebaseCrashlytics.instance.recordError(error,stack);
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack);
     return true;
   };
 
   runApp(const MyApp());
-
-
 }
 
 class MyApp extends StatelessWidget {
-
   final MaterialColor customColor = const MaterialColor(
     0xFF9AE19D,
     <int, Color>{
@@ -58,15 +55,105 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
-      title: 'Flutter Interface',
-      theme: darkTheme,
-      home: const MyNavigationWidget(),
-      initialRoute: MyHomePage.routeName,
-      routes: {
-        Favorites.routeName: (context) => const Favorites(),
-      },
+    return AppStateWidget(
+      child: MaterialApp(
+        title: 'Flutter Interface',
+        theme: darkTheme,
+        home: const MyNavigationWidget(),
+        initialRoute: MyHomePage.routeName,
+        routes: {
+          Favorites.routeName: (context) => const Favorites(),
+        },
+      ),
     );
+  }
+}
+
+class AppState {
+  final Set<String> favorites;
+
+  AppState({
+    this.favorites = const <String>{},
+  });
+
+  AppState copyWith({
+    Set<String>? favorites,
+  }) {
+    return AppState(
+      favorites: favorites ?? this.favorites,
+    );
+  }
+}
+
+class AppStateScope extends InheritedWidget {
+  final AppState data;
+
+  const AppStateScope(
+    this.data, {
+    Key? key,
+    required Widget child,
+  }) : super(key: key, child: child);
+
+  static AppState of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<AppStateScope>()!.data;
+
+    //assert(result != null, 'No InheritedFavorites found in context');
+
+    // return result;
+  }
+
+  @override
+  bool updateShouldNotify(AppStateScope oldWidget) {
+    return oldWidget.data != data;
+  }
+}
+
+class AppStateWidget extends StatefulWidget {
+  final Widget child;
+
+  const AppStateWidget({required this.child, Key? key}) : super(key: key);
+
+  static AppStateWidgetState of(BuildContext context) {
+    return context.findAncestorStateOfType<AppStateWidgetState>()!;
+  }
+
+  @override
+  State<AppStateWidget> createState() => AppStateWidgetState();
+}
+
+class AppStateWidgetState extends State<AppStateWidget> {
+  AppState _data = AppState();
+
+  void addToFavorites(String id) {
+    debugPrint('add $id');
+    if (!_data.favorites.contains(id)) {
+      final Set<String> newFavorites = Set<String>.from(_data.favorites);
+      newFavorites.add(id);
+      setState(() {
+        _data = _data.copyWith(
+          favorites: newFavorites,
+        );
+      });
+    }
+  }
+
+  void removeFromFavorites(String id) {
+    debugPrint('remove $id');
+
+    if (_data.favorites.contains(id)) {
+      final Set<String> newFavorites = Set<String>.from(_data.favorites);
+      newFavorites.remove(id);
+      setState(() {
+        _data = _data.copyWith(
+          favorites: newFavorites,
+        );
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AppStateScope(_data, child: widget.child);
   }
 }
 
@@ -105,7 +192,6 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
         selectedIndex: currentPageIndex,
         animationDuration: const Duration(milliseconds: 200),
         onDestinationSelected: (index) async {
-
           await analytics.logEvent(
             name: 'navigation_widget_pressed',
             parameters: <String, dynamic>{
@@ -116,8 +202,6 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
           setState(() {
             currentPageIndex = index;
           });
-
-
         },
       ),
     );

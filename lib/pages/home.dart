@@ -24,7 +24,7 @@ class MyHomePage extends StatelessWidget {
         // Barre de recherche ------------------------------------------------
         //SearchBarWidget(),
         // Liste -------------------------------------------------------------
-        const EventWidget(),
+        const EventWidget(filter: null,),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:apis_open_data/main.dart';
 import 'package:flutter/material.dart';
 import 'package:apis_open_data/webservices/event.dart';
 import 'package:apis_open_data/webservices/event_webservice.dart';
@@ -5,7 +6,9 @@ import 'package:apis_open_data/webservices/event_webservice.dart';
 import '../pages/details.dart';
 
 class EventWidget extends StatefulWidget {
-  const EventWidget({Key? key}) : super(key: key);
+  final Set<String>? filter;
+
+  const EventWidget({Key? key, this.filter}) : super(key: key);
 
   @override
   State<EventWidget> createState() => _EventWidgetState();
@@ -19,7 +22,7 @@ class _EventWidgetState extends State<EventWidget> {
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder<List<Event>>(
-        future: EventWebServices.getAllEvents(),
+        future: EventWebServices.getAllEvents(filter: widget.filter),
         builder: (context, AsyncSnapshot<List<Event>> snapShot) {
           if (snapShot.hasError) {
             return const Center(
@@ -95,6 +98,9 @@ class _EventWidgetState extends State<EventWidget> {
           title: event.title,
           subtitle: event.dateStart,
           url: event.coverUrl,
+          isFavorite: AppStateScope.of(context).favorites.contains(event.title),
+          onAddToFavorites: () => AppStateWidget.of(context).addToFavorites(event.title),
+          onRemoveFromFavorites: () => AppStateWidget.of(context).removeFromFavorites(event.title),
         ),
       ),
     );
