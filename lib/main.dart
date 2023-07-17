@@ -201,7 +201,7 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
                     label: Text(
                         AppStateScope.of(context).favorites.length.toString()),
                     child: const Icon(Icons.favorite))
-                : Text(AppStateScope.of(context).favorites.length.toString()),
+                : const Icon(Icons.favorite),
             label: 'Favoris',
           ),
         ],
