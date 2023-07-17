@@ -4,25 +4,30 @@ import 'package:apis_open_data/pages/favorites.dart';
 import 'package:apis_open_data/pages/home.dart';
 import 'package:apis_open_data/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
+
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-  };
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+    };
 
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack);
-    return true;
-  };
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack);
+      return true;
+    };
+  } catch(error) {
+    debugPrint('Failed to init firebase : $error');
+  }
 
   runApp(const MyApp());
 }
@@ -179,15 +184,26 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
       ][currentPageIndex],
       // Barre de navigation ---------------------------------------------------
       bottomNavigationBar: NavigationBar(
-        destinations: const [
+        destinations: [
           NavigationDestination(
               icon: Icon(Icons.home_outlined),
               selectedIcon: Icon(Icons.home),
               label: 'Accueil'),
           NavigationDestination(
-              icon: Icon(Icons.favorite_outline),
-              selectedIcon: Icon(Icons.favorite),
-              label: 'Favoris'),
+            icon: AppStateScope.of(context).favorites.isNotEmpty
+                ? Badge(
+                    label: Text(
+                        AppStateScope.of(context).favorites.length.toString()),
+                    child: const Icon(Icons.favorite_outline))
+                : const Icon(Icons.favorite_outline),
+            selectedIcon: AppStateScope.of(context).favorites.isNotEmpty
+                ? Badge(
+                    label: Text(
+                        AppStateScope.of(context).favorites.length.toString()),
+                    child: const Icon(Icons.favorite))
+                : Text(AppStateScope.of(context).favorites.length.toString()),
+            label: 'Favoris',
+          ),
         ],
         selectedIndex: currentPageIndex,
         animationDuration: const Duration(milliseconds: 200),
