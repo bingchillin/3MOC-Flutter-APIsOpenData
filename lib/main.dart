@@ -185,7 +185,7 @@ class _MyNavigationWidgetState extends State<MyNavigationWidget> {
       // Barre de navigation ---------------------------------------------------
       bottomNavigationBar: NavigationBar(
         destinations: [
-          NavigationDestination(
+          const NavigationDestination(
               icon: Icon(Icons.home_outlined),
               selectedIcon: Icon(Icons.home),
               label: 'Accueil'),

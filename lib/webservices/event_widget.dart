@@ -31,7 +31,7 @@ class _EventWidgetState extends State<EventWidget> {
           }
 
           if (snapShot.hasData) {
-            final events = snapShot.data;
+            var events = snapShot.data;
             if (events == null || events.isEmpty) {
               return const Center(child: Text('No events'));
             }
@@ -43,9 +43,12 @@ class _EventWidgetState extends State<EventWidget> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const TextField(
-                    //onChanged: (value) => _runFilter(value),
-                    decoration: InputDecoration(
+                  TextField(
+                    onChanged: (value) => setState(() {
+                      debugPrint(value);
+                      events = snapShot.data?.where((element) => element.title.contains(value)).toList();
+                    }),
+                    decoration: const InputDecoration(
                         labelText: 'Nom de l\'évènement...',
                         suffixIcon: Icon(Icons.search)),
                   ),
@@ -53,13 +56,13 @@ class _EventWidgetState extends State<EventWidget> {
                     height: 20,
                   ),
                   Expanded(
-                    child: events.isNotEmpty
+                    child: events!.isNotEmpty
                         ? ListView.builder(
-                            itemCount: events.length,
+                            itemCount: events?.length,
                             itemBuilder: (context, index) {
-                              final event = events[index];
+                              final event = events?[index];
                               return ListTile(
-                                leading: Image.network(event.coverUrl),
+                                leading: Image.network(event!.coverUrl),
                                 title: Text(event.title,
                                     style:
                                         Theme.of(context).textTheme.titleLarge),
@@ -97,6 +100,7 @@ class _EventWidgetState extends State<EventWidget> {
         builder: (context) => DetailsWidget(
           title: event.title,
           subtitle: event.dateStart,
+          description: event.description,
           url: event.coverUrl,
           isFavorite: AppStateScope.of(context).favorites.contains(event.title),
           onAddToFavorites: () => AppStateWidget.of(context).addToFavorites(event.title),

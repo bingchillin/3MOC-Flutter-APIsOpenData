@@ -7,6 +7,7 @@ class DetailsWidget extends StatefulWidget {
   final String title;
   final String subtitle;
   final String url;
+  final String description;
   final bool? isFavorite;
 
   final VoidCallback onAddToFavorites;
@@ -16,6 +17,7 @@ class DetailsWidget extends StatefulWidget {
     super.key,
     required this.title,
     required this.subtitle,
+    required this.description,
     required this.url,
     required this.onAddToFavorites,
     required this.onRemoveFromFavorites,
@@ -65,7 +67,9 @@ class _DetailsWidgetState extends State<DetailsWidget> {
                 IconButton(
                     onPressed:
                       widget.isFavorite == true ? widget.onRemoveFromFavorites : widget.onAddToFavorites
-                    , icon: widget.isFavorite == true ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline)),
+                    , icon: widget.isFavorite == true ? const Icon(Icons.favorite) : const Icon(Icons.favorite_outline)
+                ),
+                Text(widget.description.replaceAll(RegExp(r'<.+?>'), '')),
               ],
             ),
           ),
