@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../pages/details.dart';
-
 class FilterWidget extends StatefulWidget {
   const FilterWidget({Key? key}) : super(key: key);
 
@@ -89,16 +87,17 @@ class _FilterWidgetState extends State<FilterWidget> {
                             _foundEvents[index]["subtitle"].toString(),
                             style: Theme.of(context).textTheme.titleMedium),
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DetailsWidget(
-                                title: _foundEvents[index]['title'].toString(),
-                                subtitle: _foundEvents[index]['subtitle'].toString(),
-                                url: _foundEvents[index]['url'].toString(),
-                              ),
-                            ),
-                          );
+                          // Navigator.push(
+                          //   context,
+                            // MaterialPageRoute(
+                            //   builder: (context) => DetailsWidget(
+                            //     description: _foundEvents[index]['description'].toString(),
+                            //     title: _foundEvents[index]['title'].toString(),
+                            //     subtitle: _foundEvents[index]['subtitle'].toString(),
+                            //     url: _foundEvents[index]['url'].toString(),
+                            //   ),
+                          //   ),
+                          // );
                         },
                       ),
                     )

@@ -131,6 +131,7 @@ class AppStateWidgetState extends State<AppStateWidget> {
 
   void addToFavorites(String id) {
     debugPrint('add $id');
+
     if (!_data.favorites.contains(id)) {
       final Set<String> newFavorites = Set<String>.from(_data.favorites);
       newFavorites.add(id);
